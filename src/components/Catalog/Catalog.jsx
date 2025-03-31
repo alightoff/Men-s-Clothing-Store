@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import SearchInput from "../../ui/SearchInput";
-import CatalogItem from "./CatalogItem";
+import CatalogItem from "./CatalogItem.jsx";
 import SortBlock from "../../ui/SortBlock";
 import { useCatalogItems } from "../../../store/store.js";
+import { toast } from 'react-toastify';
 
 const Catalog = () => {
   const { catalogItems } = useCatalogItems()
@@ -15,6 +16,20 @@ const Catalog = () => {
     sizes: [], // массив выбранных размеров
     inStock: false, // фильтр по наличию
   });
+
+  // Функция для показа уведомления
+  const showAddToCartToast = (title) => {
+    toast.success(`${title} добавлен в корзину!`, {
+      position: "bottom-right",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
+  };
 
   // Функция для фильтрации и сортировки каталога
   const getProcessedCatalog = () => {
@@ -32,7 +47,7 @@ const Catalog = () => {
       result = result.filter((item) => sortParams.sizes.includes(item.size));
     }
 
-    // Фильтрация по наличию (добавьте поле inStock в данные товаров)
+    // Фильтрация по наличию
     if (sortParams.inStock) {
       result = result.filter((item) => item.inStock);
     }
@@ -65,7 +80,7 @@ const Catalog = () => {
         </div>
       </div>
 
-      {/* Блок сортировки (отключается при пустом каталоге) */}
+      {/* Блок сортировки */}
       <div className={`w-8/12 mx-auto duration-300 ${isFocusFilter ? "block" : "hidden"}`}>
         <SortBlock sortParams={sortParams} onSortChange={setSortParams} disabled={isCatalogEmpty} />
       </div>
@@ -75,7 +90,13 @@ const Catalog = () => {
         {isCatalogEmpty ? (
           <p className="text-center text-3xl col-span-3 font-dirt">Нет товаров, соответствующих вашему запросу.</p>
         ) : (
-          filteredCatalog.map((item) => <CatalogItem key={item.id} {...item} />)
+          filteredCatalog.map((item) => (
+            <CatalogItem 
+              key={item.id} 
+              {...item} 
+              onAddToCart={() => showAddToCartToast(item.title)}
+            />
+          ))
         )}
       </div>
     </div>

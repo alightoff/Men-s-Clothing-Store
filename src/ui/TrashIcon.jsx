@@ -1,10 +1,10 @@
 import React from "react";
 
-const TrashIcon = ({ removeItemFromCart, cartItemArticle }) => {
+const TrashIcon = ({ onClick }) => {
   return (
     <button 
     className="group relative flex h-12 w-12 flex-col items-center justify-center overflow-hidden rounded-xl border-2 border-red-800 bg-red-400 hover:bg-red-600"
-    onClick={() => removeItemFromCart(cartItemArticle)}
+    onClick={onClick}
     >
       <svg
         viewBox="0 0 1.625 1.625"

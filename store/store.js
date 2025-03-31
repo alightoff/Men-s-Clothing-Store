@@ -149,6 +149,13 @@ export const useCart = create(
       set((state) => ({
         cart: state.cart.filter((cartItem) => cartItem.id !== id),
       })),
+    updateItemCount: (id, newCount) => {
+      set((state) => ({
+        cart: state.cart.map(item =>
+          item.id === id ? { ...item, count: newCount } : item
+        )
+      }));
+    },
   }), {
     name: 'cart-storage', // уникальное имя для localStorage
   })
