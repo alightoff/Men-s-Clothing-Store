@@ -44,7 +44,7 @@ const FAQ = () => {
   };
 
   return (
-    <div className="container mx-auto h-[calc(100vh-4rem)] flex items-center justify-center flex-col gap-16">
+    <div className="container mx-auto h-[calc(100vh-10rem)] flex items-center justify-center flex-col gap-16">
       <h2 className="text-5xl font-dirt w-6/12 text-center">У вас остались вопросы? Мы собрали самые часты, возможно, вы найдете ответ на свой</h2>
       <div className="flex flex-col gap-3 w-6/12">
         {questions.map((question) => (

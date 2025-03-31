@@ -1,4 +1,3 @@
-// src/App.jsx
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { ToastContainer } from 'react-toastify';
@@ -6,7 +5,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 import Header from "./components/Header/Header";
 import Main from "./components/Main/Main";
-import About from "./components/About/About";
+import AboutUs from "./components/About/AboutUs";
 import Catalog from "./components/Catalog/Catalog";
 import Cart from "./components/Cart/Cart";
 import Contacts from "./components/Contacts/Contacts";
@@ -17,10 +16,10 @@ function App() {
     <Router>
       <div className="font-main bg-gradient-to-br from-pink-500 to-yellow-500 min-h-screen">
         <Header />
-        <div className="flex-grow">
+        <div className="flex-grow pt-16"> {/* Добавлен pt-16 для отступа под фиксированный header */}
           <Routes>
             <Route path="/" element={<Main />} />
-            <Route path="/about" element={<About />} />
+            <Route path="/about" element={<AboutUs />} />
             <Route path="/cart" element={<Cart />} />
             <Route path="/catalog" element={<Catalog />} />
             <Route path="/contacts" element={<Contacts />} />

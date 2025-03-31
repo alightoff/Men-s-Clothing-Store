@@ -14,7 +14,7 @@ const Contacts = () => {
   const inputStyle = "bg-inherit border-b border-black w-1/4 py-2 outline-none text-xl text-black placeholder:text-black"
 
   return (
-    <div className="container mx-auto h-[calc(100vh-4rem)] flex justify-center items-center">
+    <div className="container mx-auto h-[calc(100vh-10rem)] flex justify-center items-center">
       <div className=" w-3/4 rounded-lg border-2 border-dashed border-white p-7
       flex flex-col gap-14 text-black font-dirt">
         <h2 className="text-4xl text-center">Свяжитесь с нами – мы всегда на связи!</h2>

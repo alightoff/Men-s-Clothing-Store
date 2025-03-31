@@ -1,6 +1,6 @@
 import React from "react";
 
-const AboutBlocks = () => {
+const AboutUs = () => {
   const blocks = [
     {
       title: "5 лет",
@@ -36,7 +36,7 @@ const AboutBlocks = () => {
   const description = "text-xl font-dirt text-white";
 
   return (
-    <div className="container mx-auto h-[calc(100vh-4rem)] py-12 flex flex-col justify-center gap-32">
+    <div className="container mx-auto h-[calc(100vh-10rem)] py-12 flex flex-col justify-center gap-32">
       <h2 className="text-5xl text-center mb-8 font-dirt tracking-widest">О магазине</h2>
       <div className="grid grid-cols-6 grid-rows-5 gap-4 text-center">
 
@@ -65,4 +65,4 @@ const AboutBlocks = () => {
   );
 };
 
-export default AboutBlocks;
+export default AboutUs;
