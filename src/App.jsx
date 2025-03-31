@@ -10,13 +10,14 @@ import Catalog from "./components/Catalog/Catalog";
 import Cart from "./components/Cart/Cart";
 import Contacts from "./components/Contacts/Contacts";
 import FAQ from "./components/FAQ/FAQ";
+import Footer from "./components/Footer/Footer"; // Импортируем новый компонент Footer
 
 function App() {
   return (
     <Router>
-      <div className="font-main bg-gradient-to-br from-pink-500 to-yellow-500 min-h-screen">
+      <div className="font-main min-h-screen flex flex-col">
         <Header />
-        <div className="flex-grow pt-16"> {/* Добавлен pt-16 для отступа под фиксированный header */}
+        <div className="flex-grow"> {/* Основной контент с отступом под header */}
           <Routes>
             <Route path="/" element={<Main />} />
             <Route path="/about" element={<AboutUs />} />
@@ -26,6 +27,8 @@ function App() {
             <Route path="/faq" element={<FAQ />} />
           </Routes>
         </div>
+        
+        <Footer /> {/* Футер добавлен здесь */}
         
         <ToastContainer
           position="bottom-right"

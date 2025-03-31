@@ -5,66 +5,62 @@ const AboutUs = () => {
     {
       title: "5 лет",
       description: "Мы создаём одежду, которая подчеркивает вашу индивидуальность",
+      accent: "text-yellow-400"
     },
     {
       title: "Работаем с лучшими брендами",
       description: "Весна, лето и зима — каждая коллекция наполнена современными трендами.",
+      accent: "text-white"
     },
     {
       title: "Работаем с лучшими тканями",
       description: "Наши материалы проходят строгий отбор, чтобы соответствовать высоким стандартам.",
+      accent: "text-white"
     },
     {
       title: "Доставка по всей России",
       description: "Оперативная доставка в любой уголок страны. Заказы от 5000 рублей — бесплатно.",
+      accent: "text-yellow-400"
     },
     {
       title: "Сертифицированное качество",
       description: "Все наши товары проходят контроль качества и соответствуют международным стандартам.",
+      accent: "text-white"
     },
   ];
 
-  // Базовые стили блоков
-  const block = "duration-700 ease-in-out hover:bg-black text-black hover:text-white border-dashed border-slate-300 border-2 md:border-4 rounded-md p-4 md:p-6 flex flex-col justify-center";
-
-  // Стили заголовков
-  const title = "text-xl sm:text-2xl md:text-3xl lg:text-4xl font-dirt mb-2 md:mb-4";
-
-  // Стили описания
-  const description = "text-sm sm:text-base md:text-lg lg:text-xl font-dirt";
-
   return (
-    <div className="container mx-auto min-h-[calc(100vh-10rem)] py-6 sm:py-8 md:py-12 flex flex-col justify-center gap-8 sm:gap-12 md:gap-16 lg:gap-24 px-4 sm:px-6">
-      <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-center mb-4 sm:mb-6 md:mb-8 font-dirt tracking-wide sm:tracking-wider">
-        О магазине
-      </h2>
-      
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 lg:grid-rows-5 gap-3 sm:gap-4 text-center">
+    <div className="bg-gradient-to-br from-gray-900 to-gray-800 py-12 md:py-24 px-4 sm:px-6">
+      <div className="container mx-auto">
+        <h2 className="text-3xl sm:text-4xl md:text-5xl font-dirt text-center text-white mb-12 md:mb-16">
+          О нашем магазине
+        </h2>
         
-        {/* Блок 1 (занимает 2 колонки на sm/md, 3 на lg+) */}
-        <div className={`sm:col-span-2 lg:col-span-3 lg:row-span-3 ${block}`}>
-          <h3 className={title}>{blocks[1].title}</h3>
-          <p className={description}>{blocks[1].description}</p>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {blocks.map((block, index) => (
+            <div 
+              key={index}
+              className={`bg-gray-800/50 border border-gray-700 rounded-xl p-6 md:p-8 hover:bg-gray-800 transition-all duration-300 group`}
+            >
+              <h3 className={`text-2xl md:text-3xl font-dirt mb-4 ${block.accent} group-hover:text-yellow-400 transition-colors`}>
+                {block.title}
+              </h3>
+              <p className="text-gray-300 text-lg md:text-xl">
+                {block.description}
+              </p>
+            </div>
+          ))}
         </div>
 
-        {/* Блок 2 (полная ширина на sm, 2 колонки на md, 3 на lg+) */}
-        <div className={`sm:col-span-2 md:col-span-1 lg:col-span-3 lg:col-start-4 ${block}`}>
-          <h3 className={title}>{blocks[0].title}</h3>
-          <p className={description}>{blocks[0].description}</p>
+        <div className="mt-16 text-center">
+          <h3 className="text-2xl md:text-3xl font-dirt text-white mb-6">
+            Почему выбирают нас?
+          </h3>
+          <p className="text-gray-300 text-lg md:text-xl max-w-4xl mx-auto">
+            Velvet & Cotton — это не просто магазин одежды, а пространство стиля и качества. 
+            Мы тщательно отбираем каждую вещь, чтобы предложить вам только лучшее.
+          </p>
         </div>
-
-        {/* Блок 3 (полная ширина на sm, 2 колонки на md, 3 на lg+) */}
-        <div className={`sm:col-span-2 md:col-span-1 lg:col-span-3 lg:col-start-4 lg:row-start-3 ${block}`}>
-          <h3 className={title}>{blocks[2].title}</h3>
-          <p className={description}>{blocks[2].description}</p>
-        </div>
-
-        {/* Блок 4 (полная ширина на sm/md, 3 на lg+) */}
-        <div className={`sm:col-span-2 lg:col-span-3 ${block}`}>
-          <h3 className={title}>{blocks[3].title}</h3>
-          <p className={description}>{blocks[3].description}</p>
-        </div>
-
       </div>
     </div>
   );

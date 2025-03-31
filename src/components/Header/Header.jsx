@@ -24,23 +24,26 @@ const Header = () => {
   return (
     <>
       {/* Фиксированный header */}
-      <header className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-white/40 mx-6 rounded-lg shadow-2xl">
+      <header className="fixed top-0 left-0 right-0 z-50 bg-gray-900 border-b border-gray-800">
         <div className="flex justify-between items-center px-4 sm:px-6 md:px-8 lg:px-10 h-16 max-w-7xl mx-auto">
           {/* Логотип */}
-          <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-dirt whitespace-nowrap">
-            <Link to="/" className="hover:opacity-80 transition-opacity">
+          <h1 className="text-xl sm:text-2xl md:text-3xl font-dirt whitespace-nowrap">
+            <Link 
+              to="/" 
+              className="text-yellow-400 hover:text-yellow-300 transition-colors"
+            >
               Velvet & Cotton
             </Link>
           </h1>
 
           {/* Десктопное меню */}
-          <ul className="hidden lg:flex gap-6 xl:gap-8 text-sm md:text-base lg:text-xl font-dirt">
+          <ul className="hidden lg:flex gap-6 xl:gap-8 text-base font-medium">
             {navItems.map(({ title, link, id }) => (
               <li key={id}>
                 <Link
                   to={link}
-                  className={`hover:opacity-80 transition-opacity ${
-                    isActive(link) ? 'border-b-2 border-black' : ''
+                  className={`text-gray-300 hover:text-white transition-colors ${
+                    isActive(link) ? 'text-yellow-400' : ''
                   }`}
                 >
                   {title}
@@ -51,23 +54,23 @@ const Header = () => {
 
           {/* Кнопка бургер-меню */}
           <button
-            className="lg:hidden p-2 -mr-2 focus:outline-none"
+            className="lg:hidden p-2 -mr-2 focus:outline-none text-gray-300 hover:text-white"
             onClick={toggleMenu}
             aria-label="Меню"
           >
             <div className="w-6 flex flex-col gap-1.5">
               <span
-                className={`h-0.5 w-full bg-black transition-all ${
+                className={`h-0.5 w-full bg-current transition-all ${
                   isMenuOpen ? 'rotate-45 translate-y-2' : ''
                 }`}
               ></span>
               <span
-                className={`h-0.5 w-full bg-black transition-all ${
+                className={`h-0.5 w-full bg-current transition-all ${
                   isMenuOpen ? 'opacity-0' : 'opacity-100'
                 }`}
               ></span>
               <span
-                className={`h-0.5 w-full bg-black transition-all ${
+                className={`h-0.5 w-full bg-current transition-all ${
                   isMenuOpen ? '-rotate-45 -translate-y-2' : ''
                 }`}
               ></span>
@@ -77,7 +80,7 @@ const Header = () => {
 
         {/* Мобильное меню */}
         <div
-          className={`lg:hidden bg-white z-50 shadow-md transition-all duration-300 ease-in-out overflow-hidden ${
+          className={`lg:hidden bg-gray-800 z-50 transition-all duration-300 ease-in-out overflow-hidden ${
             isMenuOpen ? 'max-h-screen opacity-100 py-4' : 'max-h-0 opacity-0'
           }`}
         >
@@ -86,11 +89,11 @@ const Header = () => {
               <li key={id} className="w-full text-center">
                 <Link
                   to={link}
-                  className={`block py-2 font-dirt ${
+                  className={`block py-2 font-medium ${
                     isActive(link)
-                      ? 'border-b-2 border-black font-medium'
-                      : 'text-gray-700'
-                  }`}
+                      ? 'text-yellow-400'
+                      : 'text-gray-300 hover:text-white'
+                  } transition-colors`}
                   onClick={() => setIsMenuOpen(false)}
                 >
                   {title}
@@ -101,7 +104,7 @@ const Header = () => {
         </div>
       </header>
 
-      {/* Отступ для основного контента (равный высоте header) */}
+      {/* Отступ для основного контента */}
       <div className="h-16"></div>
     </>
   );
