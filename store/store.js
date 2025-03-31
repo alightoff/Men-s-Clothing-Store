@@ -129,34 +129,48 @@ export const useCart = create(
     cart: [],
     addItemToCart: (item) => {
       const { cart } = get();
-      const existingItem = cart.find(cartItem => cartItem.id === item.id);
+      const existingItem = cart.find(cartItem => 
+        cartItem.id === item.id && cartItem.size === item.size
+      );
       
       if (existingItem) {
-        // Если товар уже есть в корзине, увеличиваем количество
         set({
           cart: cart.map(cartItem => 
-            cartItem.id === item.id 
-              ? { ...cartItem, count: cartItem.count + 1 } 
+            cartItem.id === item.id && cartItem.size === item.size
+              ? { ...cartItem, count: Math.min(cartItem.count + 1, 5) } 
               : cartItem
           )
         });
       } else {
-        // Если товара нет в корзине, добавляем с count = 1
         set({ cart: [...cart, { ...item, count: 1 }] });
       }
     },
-    removeItemFromCart: (id) =>
+    removeItemFromCart: (id, size) =>
       set((state) => ({
-        cart: state.cart.filter((cartItem) => cartItem.id !== id),
+        cart: state.cart.filter((cartItem) => 
+          !(cartItem.id === id && cartItem.size === size)
+        ),
       })),
-    updateItemCount: (id, newCount) => {
+    updateItemCount: (id, size, newCount) => {
       set((state) => ({
         cart: state.cart.map(item =>
-          item.id === id ? { ...item, count: newCount } : item
+          item.id === id && item.size === size 
+            ? { ...item, count: newCount } 
+            : item
         )
       }));
     },
+    clearCart: () => set({ cart: [] }),
+    getTotalPrice: () => {
+      const { cart } = get();
+      return cart.reduce((sum, item) => {
+        const itemPrice = item.sale > 0 
+          ? (item.price - (item.price * item.sale) / 100) * item.count 
+          : item.price * item.count;
+        return sum + itemPrice;
+      }, 0);
+    }
   }), {
-    name: 'cart-storage', // уникальное имя для localStorage
+    name: 'cart-storage',
   })
 );
