@@ -125,14 +125,31 @@ export const useCatalogItems = create((set) => ({
 }));
 
 export const useCart = create(
-  persist((set) => ({
+  persist((set, get) => ({
     cart: [],
-    addItemToCart: (item) =>
-      set((state) => ({ cart: [...state.cart, { ...item }] })),
+    addItemToCart: (item) => {
+      const { cart } = get();
+      const existingItem = cart.find(cartItem => cartItem.id === item.id);
+      
+      if (existingItem) {
+        // Если товар уже есть в корзине, увеличиваем количество
+        set({
+          cart: cart.map(cartItem => 
+            cartItem.id === item.id 
+              ? { ...cartItem, count: cartItem.count + 1 } 
+              : cartItem
+          )
+        });
+      } else {
+        // Если товара нет в корзине, добавляем с count = 1
+        set({ cart: [...cart, { ...item, count: 1 }] });
+      }
+    },
     removeItemFromCart: (id) =>
       set((state) => ({
         cart: state.cart.filter((cartItem) => cartItem.id !== id),
       })),
-    // addCountToCartItem: () => set((state) => ({}))
-  }))
+  }), {
+    name: 'cart-storage', // уникальное имя для localStorage
+  })
 );
